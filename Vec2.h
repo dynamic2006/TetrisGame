@@ -1,63 +1,64 @@
-
+#ifndef VEC2_H
+#define VEC2_H
 
 template <typename T>
 class Vec2
 {
 public:
     Vec2() = default;
-    Vec2(T x, T y)
+    constexpr Vec2(T x, T y)
         :
         x(x),
         y(y)
     {}
 
-    T GetX() const {return x;};
-    T GetY() const {return y;};
-    void SetX(T x) {this->x = x;};
-    void SetY(T y) {this->y = y;};
+    constexpr T GetX() const {return x;};
+    constexpr T GetY() const {return y;};
+    constexpr void SetX(T x) {this->x = x;};
+    constexpr void SetY(T y) {this->y = y;};
 
 public:
-    bool operator==(const Vec2& rhs) const
+    constexpr bool operator==(const Vec2& rhs) const
     {
         return (x == rhs.x && y == rhs.y);
     }
-    bool operator!=(const Vec2& rhs) const
+    constexpr bool operator!=(const Vec2& rhs) const
     {
         return !(*this == rhs);
     }
-    Vec2 operator+(const Vec2& rhs) const
+    constexpr Vec2 operator+(const Vec2& rhs) const
     {
         return {x + rhs.x, y + rhs.y};
     }
-    Vec2 operator+(const int rhs) const
+    constexpr Vec2 operator+(const int rhs) const
     {
         return {x + rhs, y + rhs};
     }
-    Vec2& operator+=(const Vec2& rhs)
+    constexpr Vec2& operator+=(const Vec2& rhs)
     {
         return *this = *this + rhs;
     }
-    Vec2 operator-(const Vec2& rhs) const
+    constexpr Vec2 operator-(const Vec2& rhs) const
     {
         return {x - rhs.x, y - rhs.y};
     }
-    Vec2 operator-(const int rhs) const
+    constexpr Vec2 operator-(const int rhs) const
     {
         return {x - rhs, y - rhs};
     }
-    Vec2& operator-=(const Vec2& rhs)
+    constexpr Vec2& operator-=(const Vec2& rhs)
     {
         return *this = *this - rhs;
     }
-    Vec2 operator*(const Vec2& rhs) const
+    constexpr Vec2 operator*(const Vec2& rhs) const
     {
         return {x * rhs.x, y * rhs.y};
     }
-    Vec2 operator*(const int rhs) const
+    constexpr Vec2 operator*(const int rhs) const
     {
         return {x * rhs, y * rhs};
     }
-    Vec2& operator*=(const Vec2& rhs)
+    constexpr Vec2& operator*=(const Vec2& rhs)
     {
         return *this = *this * rhs;
     }
@@ -67,3 +68,5 @@ private:
     T y;
 
 };
+
+#endif

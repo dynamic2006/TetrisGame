@@ -1,11 +1,13 @@
 #include "Game.h"
+#include "Settings.h"
 
 int main() {
-    
-    const int SCREENWIDTH = 800;
-    const int SCREENHEIGHT = 600;
 
-    Game game(SCREENWIDTH, SCREENHEIGHT, 60, "Tetris Raylib");
+    Game game(
+    settings::SCREENWIDTH, 
+    settings::SCREENHEIGHT, 
+    settings::fps, 
+    "Tetris Raylib");
 
     while(!game.GameShouldClose())
     {
