@@ -1,18 +1,26 @@
-#include "Game.h"
-#include "Settings.h"
+#include <raylib.h>
+#include "Grid.h"
 
-int main() {
+int main()
+{
+    Color darkBlue = {44, 44, 127, 255};
+    InitWindow(300, 600, "Tetris");
+    SetTargetFPS(60);
 
-    Game game(
-    settings::SCREENWIDTH, 
-    settings::SCREENHEIGHT, 
-    settings::fps, 
-    "Tetris Raylib");
+    Grid grid = Grid();
+    grid.grid[0][0] = 1;
+    grid.grid[3][5] = 4;
+    grid.Print();
 
-    while(!game.GameShouldClose())
+    while(!WindowShouldClose())
     {
-        game.Tick();
+        BeginDrawing();
+        ClearBackground(darkBlue);
+        grid.Draw();
+
+        EndDrawing();
     }
 
+    CloseWindow();
     return 0;
 }
