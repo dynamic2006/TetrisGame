@@ -1,3 +1,6 @@
+#ifndef BOARD_H
+#define BOARD_H
+
 #include "raylibCpp.h"
 #include <vector>
 #include "Vec2.h"
@@ -12,6 +15,7 @@ private:
         Cell();
         void SetColor(Color c_in);
         void Remove();
+        bool Exists() const;
 
         Color GetColor() const;
 
@@ -25,8 +29,12 @@ public:
     Board(Vec2<int> screenPos, Vec2<int> widthHeight, int cellSize, int padding);
     void SetCell(Vec2<int> pos, Color c);
     void DrawCell(Vec2<int> pos) const;
+    void DrawCell(Vec2<int> pos, Color color) const;
     void DrawBorder() const;
     void Draw() const;
+    bool CellExists(Vec2<int> pos) const;
+    int GetWidth() const;
+    int GetHeight() const;
 
 private:
     std::vector<Cell> cells;
@@ -37,3 +45,5 @@ private:
     Vec2<int> screenPos;
 
 };
+
+#endif

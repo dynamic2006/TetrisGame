@@ -8,16 +8,12 @@ Game::Game(int width, int height, int fps, std::string title)
     board(settings::boardPosition, 
     settings::boardWidthHeight, 
     settings::cellSize, 
-    settings::padding)
+    settings::padding),
+    tetromino(board)
 {
     assert(!GetWindowHandle()); // if assertion triggers: window is already opened
     SetTargetFPS(fps);
     InitWindow(width, height, title.c_str());
-    for(int iy = 0; iy < 20; iy++){
-        for(int ix = 0; ix < 10; ix++){
-            board.SetCell({ix, iy}, RED);
-        }
-    }
 }
 
 Game::~Game() noexcept
@@ -43,6 +39,7 @@ void Game::Draw()
 {
     ClearBackground(BLACK);
     board.Draw();
+    tetromino.Draw();
 }
 
 void Game::Update()

@@ -1,5 +1,6 @@
 #include <string>
 #include "Board.h"
+#include "Tetromino.h"
 
 class Game
 {
@@ -18,5 +19,6 @@ private:
     void Update();
 
     Board board;
+    Jay tetromino;
 
 };
