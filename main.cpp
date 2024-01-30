@@ -1,15 +1,14 @@
 #include "Game.h"
 
-int main(void)
-{
-    //Initialization
-
+int main() {
+    
     const int SCREENWIDTH = 800;
-    const int SCREENHEIGHT = 450;
+    const int SCREENHEIGHT = 600;
 
-    Game game(SCREENWIDTH, SCREENHEIGHT, 60, "Tetris");
+    Game game(SCREENWIDTH, SCREENHEIGHT, 60, "Tetris Raylib");
 
-    while(!game.GameShouldClose()){
+    while(!game.GameShouldClose())
+    {
         game.Tick();
     }
 

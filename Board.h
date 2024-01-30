@@ -1,5 +1,6 @@
-#include "raylib.h"
+#include "raylibCpp.h"
 #include <vector>
+#include "Vec2.h"
 
 class Board
 {
@@ -12,20 +13,26 @@ private:
         void SetColor(Color c_in);
         void Remove();
 
-        private:
-        bool boardExists;
-        Color c;
+        Color GetColor() const;
 
+        private:
+        bool bExists;
+        Color c;
     };
 
 public:
-    Board(int x, int y, int width, int height, int cellSize);
-    void SetCell(int x, int y, Color c);
-    void DrawCell(int x, int y) const;
+
+    Board(Vec2<int> screenPos, Vec2<int> widthHeight, int cellSize, int padding);
+    void SetCell(Vec2<int> pos, Color c);
+    void DrawCell(Vec2<int> pos) const;
+    void Draw() const;
+
 private:
     std::vector<Cell> cells;
     const int width;
     const int height;
     const int cellSize;
-    int screenX, screenY;
+    const int padding;
+    Vec2<int> screenPos;
+
 };

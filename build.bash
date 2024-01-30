@@ -1,3 +1,3 @@
-g++ main.cpp Game.cpp -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+g++ main.cpp Game.cpp Board.cpp -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
 ./a.out

@@ -1,9 +1,10 @@
 #include <string>
+#include "Board.h"
+
 class Game
 {
 public:
     Game(int width, int height, int fps, std::string title);
-
     Game(const Game& other) = delete;
     Game& operator=(const Game& other) = delete;
     ~Game() noexcept;
@@ -13,9 +14,9 @@ public:
     void Tick();
 
 private:
-
     void Draw();
     void Update();
 
+    Board board;
 
 };

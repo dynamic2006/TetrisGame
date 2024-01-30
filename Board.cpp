@@ -1,9 +1,8 @@
 #include "Board.h"
-#include "assert.h"
-
+#include <assert.h>
 Board::Cell::Cell()
     :
-    boardExists(false),
+    bExists(false),
     c(WHITE)
 {
 }
@@ -11,30 +10,53 @@ Board::Cell::Cell()
 void Board::Cell::SetColor(Color c_in)
 {
     c = c_in;
-    boardExists = true;
+    bExists = true;
 }
 
 void Board::Cell::Remove()
 {
-    boardExists = false;
+    bExists = false;
 }
 
-Board::Board(int x, int y, int width, int height, int cellSize)
+Color Board::Cell::GetColor() const
+{
+    return c;
+}
+
+Board::Board(Vec2<int> screenPos, Vec2<int> widthHeight, int cellSize, int padding)
     :
-    screenX(x), screenY(y), width(width), height(height), cellSize(cellSize)
+    screenPos(screenPos),
+    width(widthHeight.GetX()),
+    height(widthHeight.GetY()),
+    cellSize(cellSize),
+    padding(padding)
 {
     assert(width > 0 && height > 0);
     assert(cellSize > 0);
     cells.resize(width*height);
 }
 
-void Board::SetCell(int x, int y, Color c)
+void Board::SetCell(Vec2<int> pos, Color c)
 {
-    assert(x >=0 && y >= 0 && x < width && y < height);
-    cells[y*width + x].SetColor(c);
+    assert(pos.GetX() >= 0 && pos.GetY() >= 0 && pos.GetX() < width && pos.GetY() < height);
+    cells[pos.GetY() * width + pos.GetX()].SetColor(c);
 }
 
-void Board::DrawCell(int x, int y) const
+void Board::DrawCell(Vec2<int> pos) const
 {
-    DrawRectangle()
+    assert(pos.GetX() >= 0 && pos.GetX() < width && pos.GetY() >= 0 && pos.GetY() < height);
+    Color c = cells[pos.GetY()*width + pos.GetX()].GetColor();
+    Vec2<int> topLeft = screenPos + padding + (pos * cellSize);
+
+    raycpp::DrawRectangle(topLeft, Vec2<int>{cellSize, cellSize} - padding, c);
+
+}
+
+void Board::Draw() const
+{
+    for(int iy = 0; iy < height; iy++){
+        for(int ix = 0; ix < width; ix++){
+            DrawCell({ix, iy});
+        }
+    }
 }
