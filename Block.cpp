@@ -2,7 +2,8 @@
 #include "Colors.h"
 
 Block::Block(){
-
+    rowOffset = 0;
+    colOffset = 0;
 }
 
 void Block::Rotate()
@@ -20,12 +21,35 @@ void Block::Draw()
 {
     for(int r=0; r<dimension; r++){
         for(int c=0; c<dimension; c++){
-            if(shape[r*dimension + c]) {DrawRectangle(c*CELLSIZE + 1, r*CELLSIZE + 1, CELLSIZE-1, CELLSIZE-1, COLORS[id]);}
+            if(shape[r*dimension + c]){
+                DrawRectangle((c+colOffset)*CELLSIZE + 1, (r+rowOffset)*CELLSIZE + 1, CELLSIZE-1, CELLSIZE-1, COLORS[id]);
+            }
         }
     }
 }
 
+void Block::Move(int rows, int cols)
+{
+    rowOffset += rows;
+    colOffset += cols;
+}
+
+int Block::IsBlockOutside(int gridRows, int gridCols)
+{
+    for(int r=0; r<dimension; r++){
+        for(int c=0; c<dimension; c++){
+            if(shape[r*dimension + c]){
+                if((colOffset + c) < 0) return 1; //outside left border
+                if((colOffset + c) >= gridCols) return 2; //outside right border
+                if((rowOffset + r) < 0) return 3; //outside upper border
+                if((rowOffset + r) >= gridRows) return 4; //outside lower border
+            }
+        }
+    }
+    return 0;
+}
+
 //TO DO
 //[ ] collisions
-//[ ] right & left arrow keys move
+//[X] right & left arrow keys move
 //[ ] dropping blocks

@@ -10,10 +10,13 @@ class Block
         Block();
         void Rotate();
         void Draw();
+        void Move(int rows, int cols);
+        int IsBlockOutside(int gridRows, int gridCols);
 
     protected:
         int id;
         int dimension;
+        int rowOffset, colOffset;
         std::vector<bool> shape;
 
 };
@@ -27,6 +30,7 @@ class LBlock : public Block
                     0,0,0};
             dimension = 3;
             id = 1;
+            Move(0,3);
         }
 
 };
@@ -40,6 +44,7 @@ class JBlock : public Block
                      0,0,0};
             dimension = 3;
             id = 2;
+            Move(0,3);
         }
 
 };
@@ -54,6 +59,7 @@ class IBlock : public Block
                      0,0,0,0};
             dimension = 4;
             id = 3;
+            Move(-1,3);
         }
 
 };
@@ -66,6 +72,7 @@ class OBlock : public Block
                      1,1};
             dimension = 2;
             id = 4;
+            Move(0,4);
         }
 
 };
@@ -79,6 +86,7 @@ class SBlock : public Block
                      0,0,0};
             dimension = 3;
             id = 5;
+            Move(0,3);
         }
 
 };
@@ -92,6 +100,7 @@ class TBlock : public Block
                      0,0,0};
             dimension = 3;
             id = 6;
+            Move(0,3);
         }
 
 };
@@ -105,6 +114,7 @@ class ZBlock : public Block
                      0,0,0};
             dimension = 3;
             id = 7;
+            Move(0,3);
         }
 
 };
