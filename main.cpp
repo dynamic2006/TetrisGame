@@ -1,22 +1,30 @@
 #include <raylib.h>
+#include <iostream>
 #include "Grid.h"
+#include "Block.h"
+
 
 int main()
 {
-    Color darkBlue = {44, 44, 127, 255};
     InitWindow(300, 600, "Tetris");
     SetTargetFPS(60);
 
     Grid grid = Grid();
-    grid.grid[0][0] = 1;
-    grid.grid[3][5] = 4;
+    // grid.values[0][0] = 1;
+    // grid.values[3][5] = 4;
     grid.Print();
+
+    //std::cout << "CHECKPOINT" << std::endl;
 
     while(!WindowShouldClose())
     {
         BeginDrawing();
-        ClearBackground(darkBlue);
+
+        ClearBackground(DARKBLUE);
         grid.Draw();
+        Block J = JBlock();
+        J.Rotate();
+        J.Draw();
 
         EndDrawing();
     }
