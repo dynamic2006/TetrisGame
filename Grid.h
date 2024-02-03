@@ -14,6 +14,10 @@ class Grid
         void Initialize();
         void Print();
         void Draw();
+        bool IsRowFull(int row);
+        void ClearRow(int row);
+        void MoveRowDown(int row, int numRows);
+        int ClearFullRows();
         
 
     private:

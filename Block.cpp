@@ -14,15 +14,21 @@ void Block::Rotate()
             newShape.push_back(shape[dimension*(dimension-1) - dimension*c + r]);
         }
     }
+    prevShape = shape;
     this->shape = newShape;
 }
 
-void Block::Draw()
+void Block::UndoRotate()
+{
+    shape = prevShape;
+}
+
+void Block::Draw(int xOffset, int yOffset)
 {
     for(int r=0; r<dimension; r++){
         for(int c=0; c<dimension; c++){
             if(shape[r*dimension + c]){
-                DrawRectangle((c+colOffset)*CELLSIZE + 1, (r+rowOffset)*CELLSIZE + 1, CELLSIZE-1, CELLSIZE-1, COLORS[id]);
+                DrawRectangle((c+colOffset)*CELLSIZE + xOffset, (r+rowOffset)*CELLSIZE + yOffset, CELLSIZE-1, CELLSIZE-1, COLORS[id]);
             }
         }
     }
@@ -85,6 +91,6 @@ int Block::GetId()
 }
 
 //TO DO
-//[ ] collisions
+//[X] collisions
 //[X] right & left arrow keys move
-//[ ] dropping blocks
+//[X] dropping blocks

@@ -9,7 +9,8 @@ class Block
 
         Block();
         void Rotate();
-        void Draw();
+        void UndoRotate();
+        void Draw(int xOffset, int yOffset);
         void Move(int rows, int cols);
         int IsBlockOutside(int gridRows, int gridCols);
         bool AtBottom(int gridRows);
@@ -25,6 +26,7 @@ class Block
         int dimension;
         int rowOffset, colOffset;
         std::vector<bool> shape;
+        std::vector<bool> prevShape;
 
 };
 

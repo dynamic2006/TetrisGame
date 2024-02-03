@@ -11,4 +11,7 @@
 #define cyan (Color){21, 204, 209, 255}
 #define blue (Color){13, 64, 216, 255}
 
+#define lightBlue (Color){59, 85, 162, 255}
+#define darkBlue (Color){44,44,127,255}
+
 #define COLORS (Color[]){darkGray, green, red, orange, yellow, purple, cyan, blue}
