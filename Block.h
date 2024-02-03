@@ -12,6 +12,13 @@ class Block
         void Draw();
         void Move(int rows, int cols);
         int IsBlockOutside(int gridRows, int gridCols);
+        bool AtBottom(int gridRows);
+
+        std::vector<bool> GetShape();
+        int GetRowOffset();
+        int GetColOffset();
+        int GetDimension();
+        int GetId();
 
     protected:
         int id;

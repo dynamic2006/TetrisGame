@@ -11,7 +11,7 @@ void Grid::Initialize()
 {
     for(int row=0; row < ROWS; row++){
         for(int col=0; col < COLS; col++){
-            values[row][col] = false;
+            values[row][col] = 0;
         }
     }
 }

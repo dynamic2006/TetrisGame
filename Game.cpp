@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <random>
+#include <iostream>
 
 Game::Game()
 {
@@ -47,21 +48,24 @@ void Game::HandleInput()
 
 void Game::ShiftBlock()
 {
-    int state = currentBlock.IsBlockOutside(grid.ROWS, grid.COLS);
-    switch(state)
-    {
-        case 1:
-            currentBlock.Move(0,1);
-            break;
-        case 2:
-            currentBlock.Move(0,-1);
-            break;
-        case 3:
-            currentBlock.Move(1,0);
-            break;
-        case 4:
-            currentBlock.Move(-1,0);
-            break;
+    int state = -1;
+    while(state != 0){
+        state = currentBlock.IsBlockOutside(grid.ROWS, grid.COLS);
+        switch(state)
+        {
+            case 1:
+                currentBlock.Move(0,1);
+                break;
+            case 2:
+                currentBlock.Move(0,-1);
+                break;
+            case 3:
+                currentBlock.Move(1,0);
+                break;
+            case 4:
+                currentBlock.Move(-1,0);
+                break;
+        }
     }
 }
 
@@ -81,12 +85,13 @@ void Game::MoveBlockDown()
 {
     currentBlock.Move(1,0);
     ShiftBlock();
+
+    if(currentBlock.AtBottom(grid.ROWS)) LockBlock();
 }
 
 void Game::Rotate()
 {
     currentBlock.Rotate();
-    int state = currentBlock.IsBlockOutside(grid.ROWS, grid.COLS);
     ShiftBlock();
 }
 
@@ -94,4 +99,18 @@ void Game::Draw()
 {
     grid.Draw();
     currentBlock.Draw();
+}
+
+void Game::LockBlock()
+{
+    std::vector<bool> shape = currentBlock.GetShape();
+    int d = currentBlock.GetDimension();
+    int id = currentBlock.GetId();
+    for(int r=0; r<d; r++){
+        for(int c=0; c<d; c++){
+            if(shape[r*d + c]) grid.values[r+currentBlock.GetRowOffset()][c+currentBlock.GetColOffset()] = id;
+        }
+    }
+    currentBlock = nextBlock;
+    nextBlock = GetRandomBlock();
 }

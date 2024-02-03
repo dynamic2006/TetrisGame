@@ -49,6 +49,41 @@ int Block::IsBlockOutside(int gridRows, int gridCols)
     return 0;
 }
 
+bool Block::AtBottom(int gridRows)
+{
+    for(int r=0; r<dimension; r++){
+        for(int c=0; c<dimension; c++){
+            if(shape[r*dimension + c] && rowOffset + r == gridRows - 1) return true;
+        }
+    }
+    return false;
+}
+
+std::vector<bool> Block::GetShape()
+{
+    return shape;
+}
+
+int Block::GetRowOffset()
+{
+    return rowOffset;
+}
+
+int Block::GetColOffset()
+{
+    return colOffset;
+}
+
+int Block::GetDimension()
+{
+    return dimension;
+}
+
+int Block::GetId()
+{
+    return id;
+}
+
 //TO DO
 //[ ] collisions
 //[X] right & left arrow keys move

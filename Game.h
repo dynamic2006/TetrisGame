@@ -16,6 +16,7 @@ class Game{
         void MoveBlockDown();
         void Rotate();
         void Draw();
+        void LockBlock();
     
     private:
         std::vector<Block> blocks;
